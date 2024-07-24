@@ -62,4 +62,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         return new Employee();
     }
+
+    @Override
+    public Employee findByName(String name) {
+        if(employeeRepository.existsByFirstName(name)){
+            return mapper.convertValue(employeeRepository.findByFirstName(name),Employee.class);
+        }
+        return new Employee();
+    }
 }
