@@ -1,6 +1,7 @@
 package org.icet.ems.controller;
 
 import org.icet.ems.dto.Employee;
+import org.icet.ems.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -11,16 +12,21 @@ import java.util.List;
 @RequestMapping("/employee")
 public class EmployeeController {
 
-    List<Employee> list = new ArrayList<>();
+    final EmployeeService employeeService;
+
+    EmployeeController(EmployeeService employeeService){
+        this.employeeService = employeeService;
+    }
+
 
     @PostMapping()
-    void addEmployee(@RequestBody Employee employee){
-        list.add(employee);
+    Employee addEmployee(@RequestBody Employee employee){
+        return employeeService.persist(employee);
     }
 
     @GetMapping()
     List<Employee> retriveEmployee(){
-        return list;
+        return employeeService.retrive();
     }
 
 }
