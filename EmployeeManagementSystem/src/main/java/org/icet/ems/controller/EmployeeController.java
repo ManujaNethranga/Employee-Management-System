@@ -5,7 +5,6 @@ import org.icet.ems.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -39,6 +38,11 @@ public class EmployeeController {
     @PatchMapping()
     String update(@RequestBody Employee employee){
         return employeeService.update(employee);
+    }
+
+    @GetMapping("/{id}")
+    Employee findById(@PathVariable Long id){
+        return employeeService.findById(id);
     }
 
 }
