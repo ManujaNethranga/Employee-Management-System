@@ -44,4 +44,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         return "Deleted";
     }
+
+    @Override
+    public String update(Employee employee) {
+        if(employeeRepository.existsById(employee.getId())){
+            employeeRepository.save(mapper.convertValue(employee, EmployeeEntity.class));
+        }else{
+            return "Employee Not Found";
+        }
+        return "Updated";
+    }
 }

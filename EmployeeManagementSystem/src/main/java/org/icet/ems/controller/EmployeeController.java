@@ -36,4 +36,9 @@ public class EmployeeController {
         return employeeService.delete(id);
     }
 
+    @PatchMapping()
+    String update(@RequestBody Employee employee){
+        return employeeService.update(employee);
+    }
+
 }
