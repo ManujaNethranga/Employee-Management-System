@@ -5,7 +5,9 @@ import org.icet.ems.dto.Employee;
 import java.util.List;
 
 public interface EmployeeService {
-    Employee persist(Employee employee);
+    void persist(Employee employee);
 
     List<Employee> retrive();
+
+    String delete(Long id);
 }

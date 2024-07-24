@@ -21,9 +21,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee persist(Employee employee) {
-        EmployeeEntity save = employeeRepository.save(mapper.convertValue(employee, EmployeeEntity.class));
-        return mapper.convertValue(save, Employee.class);
+    public void persist(Employee employee) {
+          employeeRepository.save(mapper.convertValue(employee, EmployeeEntity.class));
     }
 
     @Override
@@ -34,5 +33,15 @@ public class EmployeeServiceImpl implements EmployeeService {
             list.add(mapper.convertValue(element, Employee.class));
         });
         return list;
+    }
+
+    @Override
+    public String delete(Long id) {
+        if(employeeRepository.existsById(id)){
+            employeeRepository.deleteById(id);
+        }else{
+            return "id Already Deleted";
+        }
+        return "Deleted";
     }
 }

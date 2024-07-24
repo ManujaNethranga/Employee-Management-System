@@ -2,6 +2,7 @@ package org.icet.ems.controller;
 
 import org.icet.ems.dto.Employee;
 import org.icet.ems.service.EmployeeService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -20,13 +21,19 @@ public class EmployeeController {
 
 
     @PostMapping()
-    Employee addEmployee(@RequestBody Employee employee){
-        return employeeService.persist(employee);
+    @ResponseStatus(HttpStatus.CREATED)
+    void addEmployee(@RequestBody Employee employee){
+        employeeService.persist(employee);
     }
 
     @GetMapping()
     List<Employee> retriveEmployee(){
         return employeeService.retrive();
+    }
+
+    @DeleteMapping("/{id}")
+    String delete(@PathVariable Long id){
+        return employeeService.delete(id);
     }
 
 }
